@@ -9,6 +9,8 @@ import {
 	Route,
 } from "react-router-dom"
 
+// console.log(process.env.REACT_APP_NAME)
+
 ReactDOM.render(
 	<BrowserRouter>
 		<Switch>
