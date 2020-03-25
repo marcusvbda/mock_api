@@ -10,12 +10,11 @@ const jwtMiddleware = (req, res, next) => {
 
     let [schema, token] = parts
 
-    if (schema != "Bearer") return res.status(400).json({ success: false, error: "Token error" })
+    if (schema != "Bearer") return res.status(400).json({ success: false, error: "Malformatted token" })
 
     jwt.verify(token, process.env.APP_KEY, (er, decoded) => {
         if (er) return res.status(401).json({ success: false, error: "Invalid token" })
         req.user_id = decoded.id
-        console.log(decoded)
         next()
     })
 }
