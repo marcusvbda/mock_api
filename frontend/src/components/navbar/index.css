@@ -1,0 +1,69 @@
+.navbar {
+    background-color: #393E46;
+    color: white;
+    height: 46px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 20px 0 20px;
+}
+
+.navbar .nav-container {
+    max-width: 960px;
+    width: 100%;
+}
+
+@keyframes App-logo-spin {
+    from {
+      	transform: rotate(0deg);
+    }
+    to {
+    	transform: rotate(360deg);
+    }
+}
+  
+@media (prefers-reduced-motion: no-preference) {
+    .navbar .nav-container .logo .image {
+        animation: App-logo-spin infinite 20s linear;
+        height: 40px;
+    }
+}
+.navbar .nav-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar .nav-container .logo {
+    flex-direction: row;
+    display: flex;
+    align-items: center;
+    color: white;
+    text-decoration: unset;
+    font-weight: 300;
+    font-size: 20px;
+}
+
+.navbar .nav-container .logo small {
+    margin-left: 7px;
+    font-size: 14px;
+    align-self: self-start;
+    font-weight: 600;
+}
+
+
+.navbar .nav-container .account {
+    color: white;
+    text-decoration: unset;
+    font-size: 15px;
+}
+.navbar .nav-container .account.active{
+    font-weight: 600;
+}
+
+.link {
+    cursor: pointer;
+    color :cornflowerblue;
+    text-decoration: underline;
+}

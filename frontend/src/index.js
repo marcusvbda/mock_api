@@ -1,22 +1,25 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import './index.css'
+import { ContextProvider } from './context'
 import Main from './pages/main'
+import Auth from './pages/auth'
 import Error from './pages/error'
 import {
 	BrowserRouter,
 	Switch,
 	Route,
 } from "react-router-dom"
-
-// console.log(process.env.REACT_APP_NAME)
+import './index.css'
 
 ReactDOM.render(
-	<BrowserRouter>
-		<Switch>
-			<Route exact path="/" component={Main} />
-			<Route exact path="*" component={Error} />
-		</Switch>
-	</BrowserRouter>,
+	<ContextProvider>
+		<BrowserRouter>
+			<Switch>
+				<Route exact path="/" component={Main} />
+				<Route exact path="/auth" component={Auth} />
+				<Route exact path="*" component={Error} />
+			</Switch>
+		</BrowserRouter>
+	</ContextProvider>,
 	document.getElementById('root')
 )

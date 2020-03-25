@@ -26,8 +26,9 @@ const accountController = function () {
         })
     }
 
-    this.test = async (req, res) => {
+    this.testAuth = async (req, res) => {
         let user = await user_model.findById(req.user_id)
+        user.password = undefined
         return res.status(200).json({ success: true, user })
     }
 
