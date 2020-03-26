@@ -4,13 +4,25 @@ const routesController = function () {
 
     this.index = async (req, res) => {
         let routes = await route_model.find({ user_id: req.user_id })
-        return res.json({ success: true, routes })
+        return res.status(200).json({ success: true, routes })
     }
 
-    this.createRoute = async (user_id) => {
-        let route = new route_model({ name: "route_teste", user_id: user_id })
+    this.store = async (req, res) => {
+        let { id, response, slug, name, method } = req.body
+        let route = id ? await route_model.findById(id) : new route_model()
+        route.name = name
+        route.method = method
+        route.response = typeof response == "object" ? response : JSON.parse(response)
+        route.slug = slug
+        route.user_id = req.user_id
         await route.save()
-        user.save()
+        return res.status(200).json({ success: true })
+    }
+
+    this.destroy = async (req, res) => {
+        let { id } = req.params
+        await route_model.deleteOne({ user_id: req.user_id, _id: id })
+        return res.status(200).json({ success: true })
     }
 
 }
