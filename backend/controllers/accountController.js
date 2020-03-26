@@ -32,13 +32,6 @@ const accountController = function () {
         return res.status(200).json({ success: true, user })
     }
 
-    // this.createUser = () => {
-    //     let _user = { username: "root", password: bcrypt.hashSync("toor", 10) }
-    //     let new_user = new user_model(_user)
-    //     new_user.save()
-    //     return new_user
-    // }
-
 }
 
 module.exports = new accountController()

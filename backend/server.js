@@ -18,6 +18,7 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 
 app.use('/auth', require('./routes/auth'))
+app.use('/routes', require('./routes/routes'))
 
 let port = process.env.SERVER_PORT
 app.listen(port, () => {

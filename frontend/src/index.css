@@ -25,3 +25,7 @@ button.secondary {
     margin-top: 20px;
     border: unset;
 }
+
+.text-center {
+	text-align: center;
+}

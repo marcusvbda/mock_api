@@ -15,7 +15,8 @@ export default function Navbar({ user, currentPath }) {
     }
 
     const logout = () => {
-        history.replace("Auth")
+        let confirm = window.confirm("Do you wish to logout ?")
+        if (confirm) return history.replace("Auth")
     }
 
     return (

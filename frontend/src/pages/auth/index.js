@@ -1,24 +1,27 @@
-import React, { useEffect, useState, useContext } from 'react'
+import React, { useState, useContext } from 'react'
 import { Context } from '../../context'
 import "./index.css"
 import Api from "../../services/api"
 import { useHistory } from 'react-router-dom'
 import Cookies from "../../services/cookies"
 import Navbar from "../../components/navbar"
+import Loading from "../../components/loading"
 
 export default function Auth() {
     const [currentTab, setCurrentTab] = useState("signin")
     const [username, setUsername] = useState("")
+    const [loading, setloading] = useState(false)
     const [password, setPassword] = useState("")
     const { user } = useContext(Context)
     const history = useHistory()
 
-    useEffect(() => {
+    const init = () => {
         user._id = undefined
         user.username = undefined
         user.password = undefined
         Cookies.remove("session_user")
-    }, [user])
+    }
+    init()
 
     const signin = () => {
         return (
@@ -31,11 +34,12 @@ export default function Auth() {
     }
 
     const signup = () => {
-        return <h1>signup</h1>
+        return <h1 className="text-center">Not implemented yet</h1>
     }
 
     const submitSingin = (e) => {
         e.preventDefault()
+        setloading(true)
         Api.post("auth/get_token", { username, password }).then(res => {
             res = res.data
             user._id = res.user._id
@@ -54,6 +58,7 @@ export default function Auth() {
     return (
         <>
             <Navbar user={user} currentPath="Auth" />
+            <Loading text="Loading..." show={loading} />
             <div className="container">
                 <div className="card">
                     <div className="header">
