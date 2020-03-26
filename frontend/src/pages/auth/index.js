@@ -58,7 +58,7 @@ export default function Auth() {
 
     return (
         <>
-            <Navbar user={user} currentPath="Auth" />
+            <Navbar currentPath="Auth" />
             <Loading text="Loading..." show={loading} />
             <div className="container">
                 <div className="card">

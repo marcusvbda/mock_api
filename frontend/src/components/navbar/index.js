@@ -5,11 +5,9 @@ import logo from '../../assets/imgs/logo.svg'
 import {
     Link
 } from "react-router-dom"
-import { useHistory } from 'react-router-dom'
 
 export default function Navbar({ currentPath }) {
     const { user } = useContext(Context)
-    const history = useHistory()
 
     const actionButton = () => {
         if (user._id) return <span>Welcome {user.username}, click <span className="link" onClick={() => logout()}>here</span> to logout</span>
@@ -18,7 +16,7 @@ export default function Navbar({ currentPath }) {
 
     const logout = () => {
         let confirm = window.confirm("Do you want to logout ?")
-        if (confirm) return history.replace("Auth")
+        if (confirm) return window.location.replace("/auth")
     }
 
     return (

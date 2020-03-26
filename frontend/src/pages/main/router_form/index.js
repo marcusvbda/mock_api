@@ -37,7 +37,7 @@ export default function RouteForm({ list, selectedRow }) {
         for (let i = 0, l = from.length;i < l;i++)  str = str.replace(new RegExp(from.charAt(i), 'g'), to.charAt(i))
         str = str.replace(/[^a-z0-9 -]/g, '').replace(/\s+/g, '-').replace(/-+/g, '-')
         let count = list.filter(x => x.name === name).length
-        return `${str}${count >= 1 ? "-" + (++count) : ""}`
+        return `${str}${((count >= 1) && (!selectedRow)) ? "-" + (++count) : ""}`
     }
 
     const changeResponse = (e) => {
@@ -92,7 +92,7 @@ export default function RouteForm({ list, selectedRow }) {
                     </select>
                 </div>
                 <small className="description">
-                    <div>Your route is {<span className="route-method">{`[${method}] - `}</span>}{`${process.env.REACT_APP_URL}/${user._id}/`}</div>
+                    <div>Your route is {<span className="route-method">{`[${method}] - `}</span>}{`${process.env.REACT_APP_HOST}/${user._id}/`}</div>
                     <div>{f_route_name()}</div>
                 </small>
                 <div className="json-editor">
