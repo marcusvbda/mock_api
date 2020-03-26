@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import { Context } from '../../context'
 import "./index.css"
 import Api from "../../services/api"
@@ -15,13 +15,15 @@ export default function Auth() {
     const { user } = useContext(Context)
     const history = useHistory()
 
-    const init = () => {
-        user._id = undefined
-        user.username = undefined
-        user.password = undefined
-        Cookies.remove("session_user")
-    }
-    init()
+    useEffect(() => {
+        const init = () => {
+            user._id = undefined
+            user.username = undefined
+            user.password = undefined
+            Cookies.remove("session_user")
+        }
+        init()
+    }, [user])
 
     const signin = () => {
         return (
@@ -45,13 +47,12 @@ export default function Auth() {
             user._id = res.user._id
             user.username = res.user.username
             user.token = res.token
-            Api.defaults.headers.common.Authorization = `Bearer ${user.token}`
+            Api.setAuth(user.token)
             Cookies.set("session_user", JSON.stringify(user), 1)
             history.replace("/")
         }).catch(er => {
-            console.log(er)
-            if (er.response) if (er.response.data) if (er.response.data.error)
-                alert(er.response.data.error)
+            alert(Api.processError(er))
+            setloading(false)
         })
     }
 

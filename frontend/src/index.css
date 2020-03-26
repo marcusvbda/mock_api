@@ -10,22 +10,38 @@ body {
 }
 
 
-input {
+input,select {
 	padding:10px;
     border: 1px solid #e5e4e4;
     border-radius: 4px;
-    margin-bottom: 5px;
+	margin-bottom: 5px;
+	flex:1
 }
 
-
-button.secondary {
-    padding: 12px;
-    background-color: #393E46;
+button {
+	cursor: pointer;
+	padding: 12px;
     color: white;
     margin-top: 20px;
     border: unset;
 }
 
+button.secondary {
+    background-color: #393E46;
+}
+
+button.danger {
+    background-color: #d55050;
+}
+
+button:disabled {
+	opacity: .5;
+}
+
 .text-center {
 	text-align: center;
+}
+
+html {
+	scroll-behavior: smooth;
 }

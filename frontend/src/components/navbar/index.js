@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { Context } from '../../context'
 import './index.css'
 import logo from '../../assets/imgs/logo.svg'
 import {
@@ -6,16 +7,17 @@ import {
 } from "react-router-dom"
 import { useHistory } from 'react-router-dom'
 
-export default function Navbar({ user, currentPath }) {
+export default function Navbar({ currentPath }) {
+    const { user } = useContext(Context)
     const history = useHistory()
-    const actionButton = () => {
 
+    const actionButton = () => {
         if (user._id) return <span>Welcome {user.username}, click <span className="link" onClick={() => logout()}>here</span> to logout</span>
         return <Link className={(currentPath === 'Auth') ? 'account active' : 'account'} to="/auth">Sign in</Link>
     }
 
     const logout = () => {
-        let confirm = window.confirm("Do you wish to logout ?")
+        let confirm = window.confirm("Do you want to logout ?")
         if (confirm) return history.replace("Auth")
     }
 
