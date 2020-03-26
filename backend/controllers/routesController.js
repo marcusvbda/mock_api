@@ -25,6 +25,13 @@ const routesController = function () {
         return res.status(200).json({ success: true })
     }
 
+    this.run = async (req, res) => {
+        let { user_id, slug } = req.params
+        let route = await route_model.findOne({ user_id, slug, method: req.method })
+        if (!route) return res.status(404).json({ success: false, error: "Page not found" })
+        return res.status(200).json(route.response)
+    }
+
 }
 
 module.exports = new routesController()
