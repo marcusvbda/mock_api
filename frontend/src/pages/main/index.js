@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react'
 import { Context } from '../../context'
 import Navbar from "../../components/navbar"
-import "./index.css"
+import { Container } from "./styles"
 import Cookies from "../../services/cookies"
 import Api from "../../services/api"
 import { useHistory } from 'react-router-dom'
@@ -54,10 +54,10 @@ export default function Main() {
 	return (
 		<>
 			<Navbar user={user} currentPath="Home" />
-			<div className="container">
+			<Container>
 				<RouterList list={list} selectRow={selectRow} />
 				<RouteForm list={list} selectedRow={selectedRow} />
-			</div>
+			</Container>
 		</>
 	)
 }

@@ -1,13 +1,15 @@
-.container {
+import styled from "styled-components"
+
+export const Container = styled.div`
     height: 100%;
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-}
+`
 
-.container .card {
+export const Card = styled.div`
     border-radius: 5px;
     width: 30%;
     min-width: 350px;
@@ -15,21 +17,19 @@
     margin-top: 50px;
     -webkit-box-shadow: 0 10px 30px 0 rgba(0,0,0,.3);
     box-shadow: 0 10px 30px 0 rgba(0,0,0,.3);
-}
+`
 
-.container .card .body {
-    padding: 10px;
-}
+export const CardBody = styled.div`
+   padding: 10px;
+`
 
-.container .card .header {
-    display: flex;
-}
+export const CardHeader = styled.div`
+   display: flex;
+   background-color: white;
+`
 
-.container .card .header {
-    background-color: white;
-}
 
-.container .card .header .tab {
+export const CardHeaderTab = styled.div`
     cursor : pointer;
     flex: 2;
     height: 60px;
@@ -37,18 +37,10 @@
     align-items: center;
     justify-content: center;
     background-color: #D2D8D8;
-}
+`
 
-.container .card .header .tab.active {
-    background-color: white;
-}
-
-.container .card .body .user-form {
+export const AuthForm = styled.form`
     width: 100%;
     display: flex;
     flex-direction: column;
-}
-
-.container .card .body .user-form .button.secondary  {
-    margin-top: 30px;
-}
+`

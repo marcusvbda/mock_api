@@ -1,7 +1,8 @@
 import React, { useContext, useState, useEffect } from 'react'
 import JSONInput from 'react-json-editor-ajrm'
 import { Context } from '../../../context'
-import "./index.css"
+import { FormRoute, NameAction, Description, RouteMethod, RowBtn, StoringSection, CancelButton } from "./styles"
+import { Input, Select, Button } from "../../../styles"
 import Api from "../../../services/api"
 import Loading from "../../../components/loading"
 
@@ -24,8 +25,8 @@ export default function RouteForm({ list, selectedRow }) {
     }, [selectedRow])
 
     const f_route_name = () => {
-        if (!name) return <div className="f-route-name">{`{your-route-name}`}</div>
-        return <div className="f-route-name">{slug_name()}</div>
+        if (!name) return <RouteMethod>{`{your-route-name}`}</RouteMethod>
+        return <RouteMethod>{slug_name()}</RouteMethod>
     }
 
     const slug_name = () => {
@@ -80,32 +81,30 @@ export default function RouteForm({ list, selectedRow }) {
     return (
         <>
             <Loading show={loading} text="Loading..." />
-            <div className="route-form" id="route-form">
-                <div className="name-action">
-                    <input maxLength={30} placeholder="Type route name here ...." value={name} onChange={e => setName(e.target.value)} />
-                    <select value={method} onChange={e => setMethod(e.target.value)}>
+            <FormRoute id="route-form">
+                <NameAction>
+                    <Input style={{ flex: 3 }} maxLength={30} placeholder="Type route name here ...." value={name} onChange={e => setName(e.target.value)} />
+                    <Select style={{ flex: 1 }} value={method} onChange={e => setMethod(e.target.value)}>
                         <option value="GET">GET</option>
                         <option value="POST">POST</option>
                         <option value="PUT">PUT</option>
                         <option value="PATH">PATH</option>
                         <option value="DELETE">DELETE</option>
-                    </select>
-                </div>
-                <small className="description">
-                    <div>Your route is {<span className="route-method">{`[${method}] - `}</span>}{`${process.env.REACT_APP_HOST}/${user._id}/`}</div>
+                    </Select>
+                </NameAction>
+                <Description>
+                    <div>Your route is {<RouteMethod>{`[${method}] - `}</RouteMethod>}{`${process.env.REACT_APP_HOST}/${user._id}/`}</div>
                     <div>{f_route_name()}</div>
-                </small>
-                <div className="json-editor">
-                    <JSONInput height='150px' width="100%" onChange={changeResponse} placeholder={selectedRow ? selectedRow.response : null} />
-                </div>
-                <div className="row-btn">
-                    <button onClick={() => destroyRoute()} className="danger" style={{ visibility: (selectedRow ? 'unset' : 'hidden') }}>Delete Route</button>
-                    <div className="storing-btn">
-                        <span className="cancel-btn" onClick={() => cancel()} style={{ visibility: (canSave() ? 'unset' : 'hidden') }}>Cancel</span>
-                        <button className="secondary" disabled={!canSave()} onClick={save}>Save Route</button>
-                    </div>
-                </div>
-            </div>
+                </Description>
+                <JSONInput height='150px' width="100%" onChange={changeResponse} placeholder={selectedRow ? selectedRow.response : null} />
+                <RowBtn>
+                    <Button onClick={() => destroyRoute()} style={{ backgroundColor: "#d55050", visibility: (selectedRow ? 'unset' : 'hidden') }}>Delete Route</Button>
+                    <StoringSection>
+                        <CancelButton onClick={() => cancel()} style={{ visibility: (canSave() ? 'unset' : 'hidden') }}>Cancel</CancelButton>
+                        <Button disabled={!canSave()} style={{ backgroundColor: "#393E46" }} onClick={save}>Save Route</Button>
+                    </StoringSection>
+                </RowBtn>
+            </FormRoute>
         </>
     )
 }

@@ -1,34 +1,31 @@
 import React from 'react'
-import "./index.css"
+import { H1 } from "../../../styles"
+import { NoRoutes, TableList, Th, TrHead, TrBody } from "./styles"
 
 export default function RouterList({ list, selectRow }) {
 
     return (
         <>
-            <h1>My routes</h1>
+            <H1>My routes</H1>
             {
                 list.length > 0 ? (
-                    <table className="table-list">
-                        <thead>
-                            <tr>
-                                <th style={{ width: '1%' }}></th>
-                                <th>Name</th>
-                                <th>Method</th>
-                                <th>Route</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {list.map((row, index) => (
-                                <tr key={index} onClick={() => selectRow(row)}>
-                                    <td>{row._id}</td>
-                                    <td>{row.name}</td>
-                                    <td>{row.method}</td>
-                                    <td>{row.slug}</td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
-                ) : <span className="no-routes">No routes stored</span>
+                    <TableList>
+                        <TrHead>
+                            <Th style={{ width: '1%' }}></Th>
+                            <Th>Name</Th>
+                            <Th>Method</Th>
+                            <Th>Route</Th>
+                        </TrHead>
+                        {list.map((row, index) => (
+                            <TrBody key={index} onClick={() => selectRow(row)}>
+                                <td>{row._id}</td>
+                                <td>{row.name}</td>
+                                <td>{row.method}</td>
+                                <td>{row.slug}</td>
+                            </TrBody>
+                        ))}
+                    </TableList>
+                ) : <NoRoutes>No routes stored</NoRoutes>
             }
 
         </>

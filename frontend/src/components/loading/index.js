@@ -1,14 +1,14 @@
 import React from 'react'
-import "./index.css"
+import { LoadingOverlay } from "./styles"
 
 export default function Loading({ show, text }) {
 
     const render = () => {
         if (!show) return <></>
         return (
-            <div className="loading-overlay">
+            <LoadingOverlay>
                 {text}
-            </div>
+            </LoadingOverlay>
         )
     }
     return render()

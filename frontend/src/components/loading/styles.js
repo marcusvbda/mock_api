@@ -1,4 +1,6 @@
-.loading-overlay {
+import styled from 'styled-components'
+
+export const LoadingOverlay = styled.div`
     background-color: black;
     color: white;
     position: absolute;
@@ -12,4 +14,4 @@
     align-items: center;
     display: flex;
     z-index: 99999;
-}
+`

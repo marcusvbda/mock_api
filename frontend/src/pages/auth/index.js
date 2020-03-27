@@ -1,11 +1,14 @@
 import React, { useState, useContext, useEffect } from 'react'
 import { Context } from '../../context'
-import "./index.css"
 import Api from "../../services/api"
 import { useHistory } from 'react-router-dom'
 import Cookies from "../../services/cookies"
 import Navbar from "../../components/navbar"
 import Loading from "../../components/loading"
+import { Input, Button, H1 } from "../../styles"
+import {
+    Container, Card, CardBody, CardHeader, CardHeaderTab, AuthForm
+} from "./styles"
 
 export default function Auth() {
     const [currentTab, setCurrentTab] = useState("signin")
@@ -27,16 +30,16 @@ export default function Auth() {
 
     const signin = () => {
         return (
-            <form className="user-form" onSubmit={e => submitSingin(e)}>
-                <input type="text" placeholder="Username" value={username} required onChange={e => setUsername(e.target.value)} />
-                <input type="password" placeholder="Password" value={password} required onChange={e => setPassword(e.target.value)} />
-                <button className="secondary">Sign in</button>
-            </form>
+            <AuthForm onSubmit={e => submitSingin(e)}>
+                <Input type="text" placeholder="Username" value={username} required onChange={e => setUsername(e.target.value)} />
+                <Input type="password" placeholder="Password" value={password} required onChange={e => setPassword(e.target.value)} />
+                <Button className="secondary" style={{ backgroundColor: "#393E46", marginTop: 30 }}>Sign in</Button>
+            </AuthForm>
         )
     }
 
     const signup = () => {
-        return <h1 className="text-center">Not implemented yet</h1>
+        return <H1>Not implemented yet</H1>
     }
 
     const submitSingin = (e) => {
@@ -60,17 +63,17 @@ export default function Auth() {
         <>
             <Navbar currentPath="Auth" />
             <Loading text="Loading..." show={loading} />
-            <div className="container">
-                <div className="card">
-                    <div className="header">
-                        <div onClick={() => setCurrentTab("signin")} className={(currentTab === "signin") ? 'tab signin active' : 'tab signin'}>Sign in</div>
-                        <div onClick={() => setCurrentTab("signup")} className={(currentTab === "signup") ? 'tab signup active' : 'tab signin'}>Register</div>
-                    </div>
-                    <div className="body">
+            <Container>
+                <Card>
+                    <CardHeader>
+                        <CardHeaderTab onClick={() => setCurrentTab("signin")} style={{ backgroundColor: (currentTab === "signin") ? "white" : "" }}>Sign in</CardHeaderTab>
+                        <CardHeaderTab onClick={() => setCurrentTab("signup")} style={{ backgroundColor: (currentTab === "signup") ? "white" : "" }}>Register</CardHeaderTab>
+                    </CardHeader>
+                    <CardBody>
                         {(currentTab === "signin") ? signin() : signup()}
-                    </div>
-                </div>
-            </div>
+                    </CardBody>
+                </Card>
+            </Container>
         </>
     )
 }    

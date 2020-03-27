@@ -9,7 +9,6 @@ import {
 	Switch,
 	Route,
 } from "react-router-dom"
-import './index.css'
 
 ReactDOM.render(
 	<ContextProvider>
