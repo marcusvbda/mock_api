@@ -2,21 +2,26 @@ import React, { useContext } from 'react'
 import { Context } from '../../context'
 import logo from '../../assets/imgs/logo.svg'
 import { SpanLink } from "../../styles"
+import { useHistory } from 'react-router-dom'
 import {
     Nav, Container, Image, Logo, Small, Account
 } from "./styles"
 
 export default function Navbar({ currentPath }) {
-    const { user } = useContext(Context)
+    const { user, clearUser } = useContext(Context)
+    const history = useHistory()
 
     const actionButton = () => {
         if (user._id) return <span>Welcome {user.username}, click <SpanLink onClick={() => logout()}>here</SpanLink> to logout</span>
-        return <Account to="/auth">Sign in</Account>
+        return <Account to="/auth">Sign in {user.username}</Account>
     }
 
     const logout = () => {
         let confirm = window.confirm("Do you want to logout ?")
-        if (confirm) return window.location.replace("/auth")
+        if (confirm) {
+            clearUser()
+            return history.replace("/auth")
+        }
     }
 
     return (

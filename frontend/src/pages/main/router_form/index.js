@@ -14,7 +14,6 @@ export default function RouteForm({ list, selectedRow }) {
     const [response, setResponse] = useState({ success: true })
     const [jsonError, setJsonError] = useState(false)
     const [loading, setLoading] = useState(false)
-
     useEffect(() => {
         if (selectedRow) {
             setId(selectedRow._id)

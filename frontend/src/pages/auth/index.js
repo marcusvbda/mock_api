@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react'
+import React, { useState, useContext } from 'react'
 import { Context } from '../../context'
 import Api from "../../services/api"
 import { useHistory } from 'react-router-dom'
@@ -15,18 +15,8 @@ export default function Auth() {
     const [username, setUsername] = useState("")
     const [loading, setloading] = useState(false)
     const [password, setPassword] = useState("")
-    const { user } = useContext(Context)
+    const { user, setUser } = useContext(Context)
     const history = useHistory()
-
-    useEffect(() => {
-        const init = () => {
-            user._id = undefined
-            user.username = undefined
-            user.password = undefined
-            Cookies.remove("session_user")
-        }
-        init()
-    }, [user])
 
     const signin = () => {
         return (
@@ -47,13 +37,13 @@ export default function Auth() {
         setloading(true)
         Api.post("auth/get_token", { username, password }).then(res => {
             res = res.data
-            user._id = res.user._id
-            user.username = res.user.username
-            user.token = res.token
+            let new_user = { _id: res.user._id, username: res.user.username, token: res.token }
+            setUser(new_user)
             Api.setAuth(user.token)
-            Cookies.set("session_user", JSON.stringify(user), 1)
+            Cookies.set("session_user", JSON.stringify(new_user), 1)
             history.replace("/")
         }).catch(er => {
+            console.log(er)
             alert(Api.processError(er))
             setloading(false)
         })

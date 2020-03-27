@@ -10,20 +10,24 @@ export default function RouterList({ list, selectRow }) {
             {
                 list.length > 0 ? (
                     <TableList>
-                        <TrHead>
-                            <Th style={{ width: '1%' }}></Th>
-                            <Th>Name</Th>
-                            <Th>Method</Th>
-                            <Th>Route</Th>
-                        </TrHead>
-                        {list.map((row, index) => (
-                            <TrBody key={index} onClick={() => selectRow(row)}>
-                                <td>{row._id}</td>
-                                <td>{row.name}</td>
-                                <td>{row.method}</td>
-                                <td>{row.slug}</td>
-                            </TrBody>
-                        ))}
+                        <thead>
+                            <TrHead>
+                                <Th style={{ width: '1%' }}></Th>
+                                <Th>Name</Th>
+                                <Th>Method</Th>
+                                <Th>Route</Th>
+                            </TrHead>
+                        </thead>
+                        <tbody>
+                            {list.map((row, index) => (
+                                <TrBody key={index} onClick={() => selectRow(row)}>
+                                    <td>{row._id}</td>
+                                    <td>{row.name}</td>
+                                    <td>{row.method}</td>
+                                    <td>{row.slug}</td>
+                                </TrBody>
+                            ))}
+                        </tbody>
                     </TableList>
                 ) : <NoRoutes>No routes stored</NoRoutes>
             }
